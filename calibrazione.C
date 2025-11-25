@@ -17,6 +17,7 @@
 
 void calibrazione()
 {
+    gStyle->SetCanvasPreferGL();
     TGraphErrors* graph_calibrazione = new TGraphErrors("dati_calibrazione.txt", "%lg%lg%lg%lg");
     TCanvas* canva = new TCanvas("canva", "canva_calibrazione", 0,0, 800, 600);
     TF1 * fit_calibrazione = new TF1("fit_calibrazione", "[0] + [1]*x", 0, 800);
