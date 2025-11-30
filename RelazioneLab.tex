@@ -1,0 +1,106 @@
+\documentclass[a4paper]{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage[font=it, width=0.9\linewidth]{caption}
+\usepackage{mathtools}
+\usepackage{listings}
+\usepackage{graphicx}
+\usepackage{bm}
+\usepackage{caption}
+\usepackage{float}
+\usepackage{svg}
+\renewcommand{\figurename}{Fig.}
+\renewcommand{\tablename}{Tab.}
+
+\title{Misura della caratteristica di due diodi a giunzione p-n}
+\author{Bellini Samuele, Caprara Francesco}
+\date{Novembre 2025, turno 3, tavolo 10}
+
+\begin{document}
+
+\maketitle
+
+\section{Abstract}
+\section{Introduzione}
+\section{Apparato sperimentale e svolgimento}
+Gli stumenti di misura che abbiamo utilizzato sono un oscilloscopio analogico GW~GOS-652 50Mhz e un multimetro 
+digitale Iso-Tech~IDM~105. L'oscilloscopio ha una portata di 40~V, divisa in 10 sezioni definite dal valore scelto per
+i volt associati ad ognuna delle 8 divisioni dello schermo.
+I valori disponibili da associare alle divisioni sono:
+\begin{table}[H]
+    \centering
+    % \setlength{\tabcolsep}{10pt}  %column separation%
+    % \renewcommand{\arraystretch}{1.25} %row separation%
+    \begin{tabular}{c  c  c  c  c  c  c  c  c  c  c }
+        \textbf{Volts/Div} & 0.005 & 0.01 & 0.02 & 0.05 & 0.1 & 0.2 & 0.5 & 1 & 2 & 5 \\
+    \end{tabular}
+\end{table}
+\noindent L'errore associato alle misure fatte con l'oscilloscopio è dato dalla formula
+\[\sigma = \sqrt{{\sigma_L} ^2 + {\sigma_Z}^2 + {\sigma_C}^2 } \]
+dove \(\sigma_L\) è l'errore sulla lettura, pari a \(\frac{1}{2} \frac{Volts/Div}{5}\), in quanto ogni divisione è
+composta da 5 tacchette ed i segnali erano sufficientemente puliti da poter apprezzare la mezza tacchetta;
+\(\sigma_Z\) è l'errore sullo zero, cioè l'errore dovuto all'imprecisione nel posizionare la linea di 0~V, ed è
+pari alla \(\sigma_L\) associata agli 0.005~Volts/Div*****KAPE QUA DOBBIAMO DECIDERE SE DIRE DEI 20***, in quanto abbiamo utilizzato 
+quella scala per posizionare lo zero, e \(\sigma_C\) è l'errore dichiarato dal costruttore, pari al 3\% della misura. 
+\\Il multimetro è stato usato sia come voltmetro che come amperometro. Nella lettura di tensioni continue
+ha una portata di 2000~V, nel range [-1000, 1000] (*****CREDO????*****). Nell'intervallo [0, 0.4]V l'errore da associare
+alla misura è dato da 
+\[\sigma = { 0.3\% \, misura + 0.2 mV } \]
+dove \(misura\) è il valore letto dal multimetro in mV.
+Nell'intervallo [0.4, 4]V, invece, l'errore da associare
+alla misura è dato da 
+\[\sigma = { 0.1\% \, misura + 2 mV } \]
+Nella lettura di correnti continue la portata dell'amperometro è di 20~A, nel range [-10, 10]A. Nell'intervallo [0, 4]mA l'errore da associare
+alla misura è dato da 
+\[\sigma = { 0.4\% \, misura + 0.002 mA } \]
+dove \(misura\) è il valore letto dal multimetro in mA.
+Nell'intervallo [4, 400]mA, invece, l'errore da associare
+alla misura è dato da 
+\[\sigma = { 0.4\% \, misura + 0.02 mA }. \]
+Abbiamo inoltre utilizzato il generatore da banco TTi EB2025T per ottenere una tensione costante di 5~V. Per poter fornire al circuito
+un set di tensioni con step nell'ordine del mV abbiamo utilizzato un potenziometro da 1~k\(\Omega\) come partitore di tensione variabile, come verrà illustrato in seguito,
+in quanto la risoluzione del generatore non sarebbe stata sufficiente.
+
+Per verificare che oscilloscopio e multimetro fossero calibrati abbiamo realizzato il circuito riportato in \figurename~\ref{App_sper:circuiti} a sinistra
+misurando sia con il multimetro che con l'oscilloscopio lo stesso punto del circuito, con una tensione che abbiamo fatto variare nel range [5, 800]mV tramite il potenziometro, che funge 
+da resistenza variabile. Lo step di tensione tra i punti è pari al valore di una divisione dello schermo dell'oscilloscopio nel range in cui sono stati misurati, in modo da semplificare la lettura delle misure. 
+Sono stati presi un totale di 37 punti.
+
+Per misurare la curva di caratteristica in polarizzazione diretta di un diodo di silicio e uno di germanio abbiamo realizzato il circuito riportato in \figurename~\ref{App_sper:circuiti} a destra,
+dove il multimetro funge da amperometro, misurando la corrente che passa attraverso il diodo, mentre l'oscilloscopio misura la tensione ai capi del diodo.
+La tensione, per il germanio, è stata fatta variare, tramite il potenziometro, nel range [100, 760]mV, prendendo 41 coppie tensione-corrente, mentre per il germanio l'intervallo scelto è 
+[20, 340]mV misurandone 65 coppie tensione-corrente.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.8\linewidth]{circuiti.png}
+    \caption{A sinistra il circuito realizzato per calibrazione degli strumenti, a 
+    destra il circuito realizzato per la misura della curva caratteristica dei diodi.\label{App_sper:circuiti}}
+\end{figure}    
+% \begin{table}[H]
+%     \centering
+%     \setlength{\tabcolsep}{10pt}  %column separation%
+%     \renewcommand{\arraystretch}{1.25} %row separation%
+%     \begin{tabular}{c | c | c }
+%         \textbf{Volts/Div} & \textbf{Portata (V)} & \bm{{\(\sigma_L (mV)\)}} \\
+%         \hline
+%         0.005 & 0.04 &0.0005\\
+%         0.01 & 0.08 & 0.001 \\
+%         0.02 & 0.16 & 0.002 \\
+%         0.05 & 0.4 & 0.005 \\
+%         0.1 & 0.8 & 0.01  \\
+%         0.2 & 1.6 & 0.02 \\
+%         0.5 & 4 & 0.05 \\
+%         1 & 8 & 0.1 \\
+%         2 & 16 & 0.2 \\
+%         5 & 40 & 0.5 \\
+%     \end{tabular}
+%     \caption{ Specifiche dell'oscilloscopio utilizzato
+%     \label{tab:App_Sperim:dati_oscill}}
+% \end{table}
+
+\section{Risultati e discussione}
+\section{Conclusioni}
+\section{Bibliografia}
+\section{Appendice}
+
+
+\end{document}
