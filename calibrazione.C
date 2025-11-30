@@ -18,11 +18,22 @@
 void calibrazione()
 {
     gStyle->SetCanvasPreferGL();
+    gStyle->SetGridColor(14);
+    gStyle->SetGridStyle(3);
+    
     TGraphErrors* graph_calibrazione = new TGraphErrors("dati_calibrazione.txt", "%lg%lg%lg%lg");
     TCanvas* canva = new TCanvas("canva", "canva_calibrazione", 0,0, 800, 600);
     TF1 * fit_calibrazione = new TF1("fit_calibrazione", "[0] + [1]*x", 0, 800);
-    fit_calibrazione->SetParName(0,"a");
-    fit_calibrazione->SetParName(1,"b");
+    fit_calibrazione->SetParName(0,"q");
+    fit_calibrazione->SetParName(1,"m");
+
+    graph_calibrazione->SetTitle("Calibrazione Multimetro-Oscilloscopio");
+    graph_calibrazione->GetXaxis()->SetTitle("Tensione multimetro (mV)");
+    graph_calibrazione->GetYaxis()->SetTitle("Tensione oscilloscopio (mV)");
+    graph_calibrazione->GetXaxis()->SetTitleOffset(1.1);
+    graph_calibrazione->GetYaxis()->SetTitleOffset(1.);
+    canva->SetGrid();
+
     graph_calibrazione->Fit(fit_calibrazione);
     graph_calibrazione->Draw("APE");
     
