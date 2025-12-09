@@ -28,10 +28,10 @@ void fit_diodato()
     fit_Ge->SetParameter(0, 1.39e-4);
     fit_Ge->SetParameter(1, 22.49);
 
-    fit_Si->SetParName(0, "I0");
-    fit_Si->SetParName(1, "eta*VT");
-    fit_Ge->SetParName(0, "I0");
-    fit_Ge->SetParName(1, "eta*VT");
+    fit_Si->SetParName(0, "I_{0}");
+    fit_Si->SetParName(1, "#eta V_{T}");
+    fit_Ge->SetParName(0, "I_{0}");
+    fit_Ge->SetParName(1, "#eta V_{T}");
 
     graph_Si->Fit(fit_Si, "R");
     graph_Ge->Fit(fit_Ge, "R");
@@ -48,12 +48,34 @@ void fit_diodato()
     graph_Ge->GetXaxis()->SetTitleOffset(1.1);
     graph_Ge->GetYaxis()->SetTitleOffset(1.3);
 
-    gPad->SetLogy();
+    // gPad->SetLogy();
     canva->GetPad(1)->SetGrid();
     graph_Si->Draw("APE");
     
+    TLegend *legend_Si{new TLegend(0., 1., 0.2, 0.9)};
+    legend_Si->SetNColumns(1);
+    // RIGA 1
+    legend_Si->AddEntry(graph_Si, "Punti I-V (Si)", "ep");
+    legend_Si->AddEntry(fit_Si, "Fit caratteristica I-V (Si)", "l");
+    legend_Si->AddEntry((TObject *)0, (std::string(fit_Si->GetParName(0)) + " = (" + std::to_string(fit_Si->GetParameter(0)* 1e6) + " ± " +  std::to_string(fit_Si->GetParError(0) * 1e6)+ ") nA").c_str(), "");
+    legend_Si->AddEntry((TObject *)0, (std::string(fit_Si->GetParName(1)) + " = (" + std::to_string(fit_Si->GetParameter(1)) + " ± " +  std::to_string(fit_Si->GetParError(1)) + ") mV").c_str(), "");
+    legend_Si->AddEntry((TObject *)0,"", "");
+    legend_Si->Draw();
+    
+
     canva->cd(2);
-    gPad->SetLogy();
+    // gPad->SetLogy();
     canva->GetPad(2)->SetGrid();
     graph_Ge->Draw("APE");
+
+
+    TLegend *legend_Ge{new TLegend(0., 1., 0.2, 0.9)};
+    legend_Ge->SetNColumns(1);
+    // RIGA 1
+    legend_Ge->AddEntry(graph_Ge, "Punti I-V (Ge)", "ep");
+    legend_Ge->AddEntry(fit_Ge, "Fit caratteristica I-V (Ge)", "l");
+    legend_Ge->AddEntry((TObject *)0, (std::string(fit_Ge->GetParName(0)) + " = (" + std::to_string(fit_Ge->GetParameter(0)* 1e6) + " ± " +  std::to_string(fit_Ge->GetParError(0) * 1e6)+ ") nA").c_str(), "");
+    legend_Ge->AddEntry((TObject *)0, (std::string(fit_Ge->GetParName(1)) + " = (" + std::to_string(fit_Ge->GetParameter(1)) + " ± " +  std::to_string(fit_Ge->GetParError(1)) + ") mV").c_str(), "");
+    legend_Ge->AddEntry((TObject *)0,"", "");
+    legend_Ge->Draw();
 }

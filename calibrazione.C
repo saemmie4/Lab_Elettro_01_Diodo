@@ -43,9 +43,9 @@ void calibrazione()
     // no_limits_no_cl_legend_ampl->SetHeader("Amplitude - Frequency", "C"); // option "C" allows to center the header
     legend_calibrazione->SetNColumns(1);
     // RIGA 1
-    legend_calibrazione->AddEntry(graph_calibrazione, "Punti calibrazione", "ep");
+    legend_calibrazione->AddEntry(graph_calibrazione, "Punti di calibrazione", "ep");
     legend_calibrazione->AddEntry(fit_calibrazione, "Fit di calibrazione", "l");
     legend_calibrazione->AddEntry((TObject *)0, (std::string(fit_calibrazione->GetParName(0)) + " = (" + std::to_string(fit_calibrazione->GetParameter(0)) + " ± " +  std::to_string(fit_calibrazione->GetParError(0))+ ") mV").c_str(), "");
-    legend_calibrazione->AddEntry((TObject *)0, (std::string(fit_calibrazione->GetParName(1)) + " = (" + std::to_string(fit_calibrazione->GetParameter(1)) + " ± " +  std::to_string(fit_calibrazione->GetParError(1))).c_str(), "");
+    legend_calibrazione->AddEntry((TObject *)0, (std::string(fit_calibrazione->GetParName(1)) + " = (" + std::to_string(fit_calibrazione->GetParameter(1)) + " ± " +  std::to_string(fit_calibrazione->GetParError(1)) + ")").c_str(), "");
     legend_calibrazione->Draw();
 }
