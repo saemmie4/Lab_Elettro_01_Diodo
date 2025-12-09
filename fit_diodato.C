@@ -48,7 +48,7 @@ void fit_diodato()
     graph_Ge->GetXaxis()->SetTitleOffset(1.1);
     graph_Ge->GetYaxis()->SetTitleOffset(1.3);
 
-    // gPad->SetLogy();
+    gPad->SetLogy();
     canva->GetPad(1)->SetGrid();
     graph_Si->Draw("APE");
     
@@ -64,7 +64,7 @@ void fit_diodato()
     
 
     canva->cd(2);
-    // gPad->SetLogy();
+    gPad->SetLogy();
     canva->GetPad(2)->SetGrid();
     graph_Ge->Draw("APE");
 
