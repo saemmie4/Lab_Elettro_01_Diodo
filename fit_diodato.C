@@ -21,7 +21,7 @@ void fit_diodato()
 
     TF1 *fit_Si = new TF1("fit_Si", "[0]*(TMath::Exp(x/[1]) - 1)", 0, 650);
     // TF1 * fit_Si = new TF1("fit_Si", "[0]*(TMath::Log(x/[1] + 1))", 0.00, 6);
-    TF1 *fit_Ge = new TF1("fit_Ge", "[0]*(TMath::Exp(x/[1]) - 1)", 0, 140);
+    TF1 *fit_Ge = new TF1("fit_Ge", "[0]*(TMath::Exp(x/[1]) - 1)", 0, 120);
 
     fit_Si->SetParameter(0, 1.484e-6);
     fit_Si->SetParameter(1, 46.05);
@@ -48,7 +48,7 @@ void fit_diodato()
     graph_Ge->GetXaxis()->SetTitleOffset(1.1);
     graph_Ge->GetYaxis()->SetTitleOffset(1.3);
 
-    gPad->SetLogy();
+    // gPad->SetLogy();
     canva->GetPad(1)->SetGrid();
     graph_Si->Draw("APE");
     
@@ -64,7 +64,7 @@ void fit_diodato()
     
 
     canva->cd(2);
-    gPad->SetLogy();
+    // gPad->SetLogy();
     canva->GetPad(2)->SetGrid();
     graph_Ge->Draw("APE");
 
